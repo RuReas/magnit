@@ -6,8 +6,7 @@ public interface NRepository {
 
     void createTable();
 
-    void save(int record);
+    void insertRecords(int n);
 
     List<Integer> getRecords();
-
 }

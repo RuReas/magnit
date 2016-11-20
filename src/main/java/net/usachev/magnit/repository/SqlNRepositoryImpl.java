@@ -1,15 +1,12 @@
 package net.usachev.magnit.repository;
 
 import net.usachev.magnit.sql.Sql;
-import org.slf4j.Logger;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.slf4j.LoggerFactory.getLogger;
 
 public class SqlNRepositoryImpl implements NRepository {
 
@@ -26,11 +23,14 @@ public class SqlNRepositoryImpl implements NRepository {
     }
 
     @Override
-    public void save(final int record) {
+    public void insertRecords(int n) {
         sql.execute(connection -> {
             try (PreparedStatement st = connection.prepareStatement("INSERT INTO test (field) VALUES (?)")) {
-                st.setInt(1, record);
-                st.execute();
+                for (int i = 1; i <= n; i++) {
+                    st.setInt(1, i);
+                    st.addBatch();
+                }
+                st.executeBatch();
             }
             return null;
         });

@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) throws TransformerException, IOException, ParserConfigurationException, SAXException {
         MagnitTestTask magnitTestTask = new MagnitTestTask();
-        magnitTestTask.setN(100);
+        magnitTestTask.setN(1000000);
         magnitTestTask.insertRecords();
         String fromXML = "1.xml";
         String toXML = "2.xml";

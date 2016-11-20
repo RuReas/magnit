@@ -5,23 +5,16 @@ import net.usachev.magnit.converter.SAXSumElements;
 import net.usachev.magnit.converter.XmlConverterImpl;
 import net.usachev.magnit.repository.NRepository;
 import org.slf4j.Logger;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import javax.xml.crypto.dsig.TransformException;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.sql.ResultSet;
-import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -52,9 +45,7 @@ public class MagnitTestTask {
     }
 
     public void insertRecords() {
-        for (int i = 1; i <= getN(); i++) {
-            repository.save(i);
-        }
+        repository.insertRecords(getN());
         LOG.info("Insert {} records in table", getN());
     }
 
@@ -76,7 +67,7 @@ public class MagnitTestTask {
         LOG.info("Convert XML from <{}> to <{}>", fromXml, toXml);
     }
 
-    public int parseToSum(String fromXml) throws ParserConfigurationException, SAXException, IOException {
+    public long parseToSum(String fromXml) throws ParserConfigurationException, SAXException, IOException {
         SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
         SAXSumElements saxSumElements = new SAXSumElements();
         parser.parse(new File(fromXml), saxSumElements);
