@@ -42,5 +42,5 @@
 6) При больших N (~1000000) время работы приложения не должно быть более пяти минут.
 
 
-##### <a href="http://usachev.net/" target=_blank>Блог Усачёва</a>
+##### <a href="https://usachev.net/" target=_blank>Блог Усачёва</a>
 
